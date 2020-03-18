@@ -16,6 +16,7 @@ const storage = new GridFsStorage({
                 if (err) {
                     return reject(err);
                 }
+                // Think about how the file name could start with the id of the activity
                 console.log(req.body.activityId);
                 const filename = buf.toString('hex') + path.extname(file.originalname);
                 const fileInfo = {

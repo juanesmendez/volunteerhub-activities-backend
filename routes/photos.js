@@ -25,8 +25,36 @@ router.get('/', (req, res) => {
 
 // GET AN SPECIFIC PHOTO
 router.get('/:fileName', (req, res) => {
-    gfs.files.find({ filename: req.params.fileName }).toArray((err, files) => {
-        return res.json(files);
+    gfs.files.findOne({ filename: req.params.fileName }, (err, file) => {
+        if (!file || file.length === 0) {
+            return res.status(404).json({
+                err: "No file exists"
+            });
+        }
+        // File exists
+        return res.json(file);
+    });
+});
+
+// GET AN IMAGE (image/:filename)
+// It displays a single file object
+router.get('/image/:fileName', (req, res) => {
+    gfs.files.findOne({ filename: req.params.fileName }, (err, file) => {
+        if (!file || file.length === 0) {
+            return res.status(404).json({
+                err: "No file exists"
+            });
+        }
+        // Check if image
+        if (file.contentType == 'image/jpeg' || file.contentType == 'image/png') {
+            // Read output to browser
+            const readstream = gfs.createReadStream(file.filename);
+            readstream.pipe(res);
+        } else {
+            res.status(404).json({
+                err: "Not an image"
+            })
+        }
     });
 });
 
