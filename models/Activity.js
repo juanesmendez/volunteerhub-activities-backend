@@ -10,6 +10,7 @@ const ActivitySchema = mongoose.Schema({
         required: true
     },
     volunteersNeeded: Number,
+    volunteersAttending: Number,
     date: {
         type: Date
     },

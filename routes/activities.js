@@ -33,6 +33,7 @@ const upload = multer({ storage });
 
 // GET BACK ALL OF THE ACTIVITIES
 router.get('/', (req, res) => {
+    console.log("Received GET request for /activities/")
     Activity.find({})
         .then(data => {
             res.json(data);
@@ -57,6 +58,8 @@ router.post('/', upload.array('images'), (req, res) => {
         name: req.body.name,
         description: req.body.description,
         volunteersNeeded: req.body.volunteersNeeded,
+        //volunteersAttending: req.body.volunteersAttending,
+        volunteersAttending: 0,
         date: req.body.date,
         images: images
     });
