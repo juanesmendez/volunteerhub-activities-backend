@@ -39,6 +39,7 @@ router.get('/:fileName', (req, res) => {
 // GET AN IMAGE (image/:filename)
 // It displays a single file object
 router.get('/image/:fileName', (req, res) => {
+    console.log(`Received GET request for /photos/image/${req.params.fileName}`)
     gfs.files.findOne({ filename: req.params.fileName }, (err, file) => {
         if (!file || file.length === 0) {
             return res.status(404).json({
