@@ -9,6 +9,10 @@ const ActivitySchema = mongoose.Schema({
         type: String,
         required: true
     },
+    category: {
+        type: String,
+        required: true
+    },
     volunteersNeeded: Number,
     volunteersAttending: Number,
     date: {
