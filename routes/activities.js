@@ -61,7 +61,8 @@ router.post('/', upload.array('images'), (req, res) => {
         //volunteersAttending: req.body.volunteersAttending,
         volunteersAttending: 0,
         date: req.body.date,
-        images: images
+        images: images,
+        volunteers: volunteers
     });
     // Save the activity in the database
     console.log("we are here");
@@ -78,6 +79,7 @@ router.post('/', upload.array('images'), (req, res) => {
 
 //GET AN SPECIGIC ACTIVITY
 router.get('/:activityId', (req, res) => {
+    console.log(`Received GET request for /activities/${req.params.activityId}`)
     //console.log(req.params.activityId);
     Activity.findById(req.params.activityId)
         .then(data => {
@@ -101,6 +103,8 @@ router.delete('/:activityId', (req, res) => {
 
 //UPDATE AN ACTIVITY
 router.put('/:activityId', (req, res) => {
+    console.log(`Received PUT request for /activities/${req.params.activityId}`)
+    console.log(req.body)
     Activity.updateOne({ _id: req.params.activityId }, req.body)
         .then(data => {
             res.json(data);

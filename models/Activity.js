@@ -21,6 +21,9 @@ const ActivitySchema = mongoose.Schema({
     images: [{
         fileName: String
         // We could add a description to each image
+    }],
+    volunteers: [{
+        type: String
     }]
 });
 
