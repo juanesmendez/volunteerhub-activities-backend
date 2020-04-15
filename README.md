@@ -1,6 +1,6 @@
 # VolunteerHub Mobile App Activities Database 🌎🎗
 
-This repository contains the back-end code of the VolunteerHub Mobile App. It was developed with Node.js using Express. VolunteerHub is an app for iOS and Android, that offers volunteers a platform in which they can easily find volunteer activities around their area that they can join and start helping others right way!
+This repository contains the back-end code of the VolunteerHub Mobile App. It was developed with Node.js using Express. VolunteerHub is an app for iOS and Android, that offers volunteers a platform in which they can easily find volunteer activities around their area, making it possible for them to start helping others right way!
 
 ### Javacript libraries and frameworks used 📚
 
