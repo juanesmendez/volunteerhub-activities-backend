@@ -25,7 +25,7 @@ All of the API (REST) requests return a JSON response.
 
 ## How to run the project? 👨🏻‍💻
 
-In order for the project to work, you have to create a sandbox database in MongoDB. You also need to install `node package manager`. After doing this, you have to have to follow the steps shown below:
+In order for the project to work, you have to create a sandbox database in MongoDB. You also need to install `node package manager`. After doing this, you have to follow the steps shown below:
 
 1. Create an environment variable called `DB_CONNECTION` in your server, with the `URL`of your remote Mongo database. The URL looks something like this: `mongodb+srv://<your-username>:<your-password>@<sandbox-name>-qudpf.mongodb.net/test?retryWrites=true&w=majority%`
 2. Run `npm install`.
