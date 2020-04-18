@@ -57,12 +57,13 @@ router.post('/', upload.array('images'), (req, res) => {
     const activity = new Activity({
         name: req.body.name,
         description: req.body.description,
+        category: req.body.category,
         volunteersNeeded: req.body.volunteersNeeded,
         //volunteersAttending: req.body.volunteersAttending,
         volunteersAttending: 0,
         date: req.body.date,
         images: images,
-        volunteers: volunteers
+        volunteers: []
     });
     // Save the activity in the database
     console.log("we are here");
