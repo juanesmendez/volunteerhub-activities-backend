@@ -53,18 +53,57 @@ router.post('/', upload.array('images'), (req, res) => {
             fileName: val.filename
         });
     });
+
     console.log(images);
-    const activity = new Activity({
-        name: req.body.name,
-        description: req.body.description,
-        category: req.body.category,
-        volunteersNeeded: req.body.volunteersNeeded,
-        //volunteersAttending: req.body.volunteersAttending,
-        volunteersAttending: 0,
-        date: req.body.date,
-        images: images,
-        volunteers: []
-    });
+    // if it is sent, it is an object, if not it is undefined
+    console.log(req.body.location);
+
+    let locationObj = {}
+    console.log(`Location object: ${locationObj}`)
+    if (req.body.location != undefined) {
+        console.log("Location si esta definido")
+        locationObj = JSON.parse(req.body.location)
+        console.log(`location: ${locationObj}`)
+        console.log(`latitude: ${locationObj.latitude}`)
+        console.log(`longitude: ${locationObj.longitude}`)    
+    } else {
+        locationObj = null
+    }
+
+    // console.log("Location object latitude: ", locationObj.latitude)
+    // console.log("Location object longitude: ", locationObj.longitude)
+    let activity = new Activity()
+    if (locationObj != null) {
+        activity = new Activity({
+            name: req.body.name,
+            description: req.body.description,
+            category: req.body.category,
+            volunteersNeeded: req.body.volunteersNeeded,
+            //volunteersAttending: req.body.volunteersAttending,
+            volunteersAttending: 0,
+            date: req.body.date,
+            location: {
+                latitude: locationObj.latitude,
+                longitude: locationObj.longitude
+            },
+            images: images,
+            volunteers: []
+        });
+    } else {
+        activity = new Activity({
+            name: req.body.name,
+            description: req.body.description,
+            category: req.body.category,
+            volunteersNeeded: req.body.volunteersNeeded,
+            //volunteersAttending: req.body.volunteersAttending,
+            volunteersAttending: 0,
+            date: req.body.date,
+            location: req.body.location,
+            images: images,
+            volunteers: []
+        });
+    }
+    
     // Save the activity in the database
     console.log("we are here");
     console.log(req.body);

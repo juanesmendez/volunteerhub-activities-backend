@@ -18,6 +18,13 @@ const ActivitySchema = mongoose.Schema({
     date: {
         type: Date
     },
+    location: {
+        type: {
+            latitude: Number,
+            longitude: Number    
+        },
+        required: true
+    },
     images: [{
         fileName: String
         // We could add a description to each image
