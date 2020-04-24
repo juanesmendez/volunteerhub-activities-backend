@@ -142,9 +142,20 @@ router.delete('/:activityId', (req, res) => {
 });
 
 //UPDATE AN ACTIVITY
-router.put('/:activityId', (req, res) => {
+router.put('/:activityId', upload.array('images'), (req, res) => {
     console.log(`Received PUT request for /activities/${req.params.activityId}`)
     console.log(req.body)
+    // Creating the array of images of the activity
+    if (req.files != undefined) {
+        var images = [];
+        req.files.map((val, index) => {
+            images.push({
+                fileName: val.filename
+            });
+        });
+        req.body["images"] = images
+        console.log(images);    
+    }
     Activity.updateOne({ _id: req.params.activityId }, req.body)
         .then(data => {
             res.json(data);
