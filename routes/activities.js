@@ -45,14 +45,17 @@ router.get('/', (req, res) => {
 
 // SUBMITS AN ACTIVITY
 router.post('/', upload.array('images'), (req, res) => {
+    console.log(req.body);
     //console.log(req.files);
     // Creating the array of images of the activity
     var images = [];
-    req.files.map((val, index) => {
-        images.push({
-            fileName: val.filename
+    if (req.files != undefined) {
+        req.files.map((val, index) => {
+            images.push({
+                fileName: val.filename
+            });
         });
-    });
+    }
 
     console.log(images);
     // if it is sent, it is an object, if not it is undefined
@@ -65,7 +68,7 @@ router.post('/', upload.array('images'), (req, res) => {
         locationObj = JSON.parse(req.body.location)
         console.log(`location: ${locationObj}`)
         console.log(`latitude: ${locationObj.latitude}`)
-        console.log(`longitude: ${locationObj.longitude}`)    
+        console.log(`longitude: ${locationObj.longitude}`)
     } else {
         locationObj = null
     }
@@ -103,7 +106,7 @@ router.post('/', upload.array('images'), (req, res) => {
             volunteers: []
         });
     }
-    
+
     // Save the activity in the database
     console.log("we are here");
     console.log(req.body);
@@ -154,7 +157,7 @@ router.put('/:activityId', upload.array('images'), (req, res) => {
             });
         });
         req.body["images"] = images
-        console.log(images);    
+        console.log(images);
     }
     Activity.updateOne({ _id: req.params.activityId }, req.body)
         .then(data => {
